@@ -1,5 +1,5 @@
 use std::env;
-use anyhow::{Ok, Result};
+use anyhow::Result;
 use std::fs;
 
 #[derive(Debug)]
@@ -32,12 +32,22 @@ pub fn run(config: Config) ->  Result<()> {
         matches = search(&config.search_string, &contents)
     }
 
+    for match_s in matches {
+        println!("{match_s}");
+    }
+
     Ok(())
 }
 
 fn search<'a>(search_string: &'a str, contents: &'a str) -> Vec<&'a str> {
+    let mut results = Vec::new();
+    for line in contents.lines() {
+        if line.contains(search_string) {
+            results.push(line);
+        }
+    }
 
-
+    results
 }
 
 // fn search_case_insensitve<'a>(search_string: &'a str, contents: &'a str) -> Vec<&'a str> {
