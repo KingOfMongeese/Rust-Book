@@ -1,4 +1,4 @@
-use clap::Parser;
+use clap::{Parser, ArgAction};
 
 /// A small version of grep that searchs a file.
 #[derive(Parser)]
@@ -11,6 +11,6 @@ pub struct Args {
     pub file_name: String,
 
     /// print matches in color (red)
-    #[arg(default_value_t = true, long)]
+    #[arg(default_value_t = true, long, action = ArgAction::Set)]
     pub do_print_color: bool,
 }
