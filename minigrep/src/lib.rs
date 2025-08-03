@@ -1,4 +1,4 @@
-use std::env;
+use std::{env};
 use anyhow::Result;
 use std::fs;
 use owo_colors::OwoColorize;
@@ -63,7 +63,7 @@ fn print_matches(matches: &Vec<&str>, config: &Config) {
                 if !word.contains(&config.search_string) {
                     print!("{word} ");
                 } else {
-                    print!("{} ", word.red());
+                    print!("{} ", word.if_supports_color(owo_colors::Stream::Stdout, |word| word.red()));
                 }
             });
             println!();
