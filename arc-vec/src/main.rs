@@ -33,7 +33,7 @@ fn main() {
                 let range_to_add = 0..100;
                 let mut num_to_add = rng.random_range(range_to_add.clone());
 
-                // aqcuire a lock on our data, this blcoks all other threads
+                // aqcuire a lock on our data, this blcoks all other threads trying to lock
                 // explicitly waitied until we absolutely need the data to lock
                 let mut data = shared_state.lock().unwrap();
 
@@ -43,7 +43,7 @@ fn main() {
                 }
                 // push the data
                 data.push(num_to_add);
-            } // mutex unlocked at the end of each loop iter
+            } // mutex unlocked at the end of each loop iter, since its dropped
 
         });
 
