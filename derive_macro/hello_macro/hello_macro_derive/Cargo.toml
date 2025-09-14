@@ -3,6 +3,7 @@ name = "hello_macro_derive"
 version = "0.1.0"
 edition = "2024"
 
+# must be marked as a proc-macro crate type
 [lib]
 proc-macro = true
 

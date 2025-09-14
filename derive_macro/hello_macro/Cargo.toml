@@ -8,4 +8,5 @@ edition = "2024"
 hello_macro_derive = { version = "0.1.0", path = "hello_macro_derive", optional = true }
 
 [features]
-hello_macro_derive = ["dep:hello_macro_derive"]
+default = []
+derive = ["hello_macro_derive"]
