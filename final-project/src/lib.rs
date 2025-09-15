@@ -2,6 +2,8 @@ use std::{
     fs,
     io::{Read, Write},
     net::TcpStream,
+    thread,
+    time::Duration,
 };
 
 // TODO print client specific info or something cool
@@ -23,9 +25,12 @@ struct GeneratedResponse {
 
 impl GeneratedResponse {
     fn generate_response(request: &[u8]) -> Self {
-
         let get = b"GET / HTTP/1.1\r\n";
+        let sleep = b"GET /sleep HTTP/1.1\r\n";
         let (status_line, filename) = if request.starts_with(get) {
+            ("HTTP/1.1 200 OK".to_string(), "index.html".to_string())
+        } else if request.starts_with(sleep) {
+            thread::sleep(Duration::from_secs(8));
             ("HTTP/1.1 200 OK".to_string(), "index.html".to_string())
         } else {
             ("HTTP/1.1 404 NOT FOUND".to_string(), "404.html".to_string())
@@ -35,7 +40,6 @@ impl GeneratedResponse {
             status_line,
             file_to_render: filename,
         }
-
     }
 
     fn as_http_response(&self) -> String {
