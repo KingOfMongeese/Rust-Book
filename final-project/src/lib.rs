@@ -6,7 +6,6 @@ use std::{
     time::Duration,
 };
 
-// TODO print client specific info or something cool
 pub fn handle_connection(mut stream: TcpStream) {
     let mut buffer = [0u8; 1024];
     stream.read(&mut buffer).unwrap();
